@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow, dialog, ipcMain } from "electron";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
@@ -62,3 +62,11 @@ const openFile = async (browserWindow: BrowserWindow, filePath: string) => {
 
   browserWindow.webContents.send("file-opened", content, filePath);
 };
+
+ipcMain.on("show-open-dialog", (event) => {
+  const browserWindow = BrowserWindow.fromWebContents(event.sender);
+
+  if (!browserWindow) return;
+
+  showOpenDialog(browserWindow);
+});
