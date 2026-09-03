@@ -55,11 +55,11 @@ const showOpenDialog = async (browserWindow: BrowserWindow) => {
 
   const [filePath] = result.filePaths;
 
-  openFile(filePath);
+  openFile(browserWindow, filePath);
 };
 
-const openFile = async (filePath: string) => {
+const openFile = async (browserWindow: BrowserWindow, filePath: string) => {
   const content = await readFile(filePath, { encoding: "utf-8" });
 
-  console.log(content);
+  browserWindow.webContents.send("file-opened", content, filePath);
 };
