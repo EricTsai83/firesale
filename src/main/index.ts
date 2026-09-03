@@ -23,7 +23,6 @@ const createWindow = () => {
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
     mainWindow.focus();
-    showOpenDialog(mainWindow);
   });
 
   mainWindow.webContents.openDevTools({
