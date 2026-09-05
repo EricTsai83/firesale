@@ -214,17 +214,14 @@ const template: MenuItemConstructorOptions[] = [
 
           showOpenDialog(browserWindow);
         },
+        accelerator: "CmdOrCtrl+O",
       },
     ],
   },
+  {
+    label: "Edit",
+    role: "editMenu",
+  },
 ];
 
-if (process.platform === "darwin") {
-  template.unshift({
-    label: app.name,
-  });
-}
-
-const menu = Menu.buildFromTemplate(template);
-
-Menu.setApplicationMenu(menu);
+Menu.setApplicationMenu(Menu.buildFromTemplate(template));
