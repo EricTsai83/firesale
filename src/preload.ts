@@ -15,4 +15,5 @@ contextBridge.exposeInMainWorld("api", {
     console.log({ result });
     return result;
   },
+  showInFolder: () => ipcRenderer.send("show-in-folder"),
 });

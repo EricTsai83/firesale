@@ -3,6 +3,7 @@ import Elements from "./elements";
 
 window.api.onFileOpen((content: string) => {
   Elements.MarkdownView.value = content;
+  Elements.ShowFileButton.disabled = false;
   renderMarkdown(content);
 });
 
@@ -25,4 +26,8 @@ Elements.ExportHtmlButton.addEventListener("click", () => {
 Elements.SaveMarkdownButton.addEventListener("click", async () => {
   const content = Elements.MarkdownView.value;
   window.api.saveFile(content);
+});
+
+Elements.ShowFileButton.addEventListener("click", () => {
+  window.api.showInFolder();
 });
