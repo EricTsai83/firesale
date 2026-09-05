@@ -10,4 +10,9 @@ contextBridge.exposeInMainWorld("api", {
   showExportHtmlDialog: (html: string) =>
     ipcRenderer.send("show-export-html-dialog", html),
   saveFile: (content: string) => ipcRenderer.send("save-file", content),
+  checkForUnsavedChanges: async (content: string) => {
+    const result = await ipcRenderer.invoke("has-changed", content);
+    console.log({ result });
+    return result;
+  },
 });
