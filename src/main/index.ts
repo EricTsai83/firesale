@@ -1,10 +1,30 @@
 import { app, BrowserWindow, dialog, ipcMain } from "electron";
 import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
+import { join, basename } from "path";
 
 type MarkdownFile = {
   content?: string;
   filePath?: string;
+};
+
+const getCurrentFile = async (browserWindow?: BrowserWindow) => {
+  if (currentFile.filePath) return currentFile.filePath;
+
+  if (!browserWindow) return;
+
+  return showSaveDialog(browserWindow);
+};
+
+const setCurrentFile = (
+  browserWindow: BrowserWindow,
+  filePath: string,
+  content: string,
+) => {
+  currentFile.filePath = filePath;
+  currentFile.content = content;
+
+  browserWindow.setTitle(`${basename(filePath)} - ${app.name}`);
+  browserWindow.setRepresentedFilename(basename(filePath));
 };
 
 let currentFile: MarkdownFile = {
@@ -70,6 +90,8 @@ const showOpenDialog = async (browserWindow: BrowserWindow) => {
 const openFile = async (browserWindow: BrowserWindow, filePath: string) => {
   const content = await readFile(filePath, { encoding: "utf-8" });
 
+  setCurrentFile(browserWindow, filePath, content);
+
   browserWindow.webContents.send("file-opened", content, filePath);
 };
 
@@ -127,12 +149,13 @@ const showSaveDialog = async (browserWindow: BrowserWindow) => {
 };
 
 const saveFile = async (browserWindow: BrowserWindow, content: string) => {
-  const filePath =
-    currentFile.filePath ?? (await showSaveDialog(browserWindow));
+  const filePath = await getCurrentFile(browserWindow);
 
   if (!filePath) return;
 
   await writeFile(filePath, content, { encoding: "utf-8" });
+
+  setCurrentFile(browserWindow, filePath, content);
 };
 
 ipcMain.on("save-file", async (event, content: string) => {
