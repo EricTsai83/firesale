@@ -177,8 +177,14 @@ ipcMain.handle("has-changed", async (event, content: string) => {
   return changed;
 });
 
-ipcMain.on("show-in-folder", () => {
+ipcMain.on("show-in-folder", async () => {
   if (currentFile.filePath) {
     shell.showItemInFolder(currentFile.filePath);
+  }
+});
+
+ipcMain.on("open-in-default-application", async () => {
+  if (currentFile.filePath) {
+    shell.openPath(currentFile.filePath);
   }
 });
