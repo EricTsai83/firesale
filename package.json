@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "packageManager": "pnpm@12.3.4",
   "description": "A simple Markdown editor built with Electron and Vite.",
-  "main": ".vite/build/index.js",
+  "type": "module",
+  "main": ".vite/build/index.cjs",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -26,10 +27,12 @@
     "@electron-forge/maker-zip": "^7.11.2",
     "@electron-forge/plugin-auto-unpack-natives": "^7.11.2",
     "@electron-forge/plugin-vite": "^7.11.2",
+    "@electron-forge/shared-types": "^7.11.2",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
     "autoprefixer": "^10.5.5",
     "electron": "44.2.0",
+    "jiti": "^2.7.0",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "vite": "^8.2.2"

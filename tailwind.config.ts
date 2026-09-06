@@ -1,3 +1,6 @@
+import typography from '@tailwindcss/typography';
+import type { Config } from 'tailwindcss';
+
 const colors = {
   primary: {
     DEFAULT: '#129de5',
@@ -67,8 +70,7 @@ const colors = {
   },
 };
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./index.html', './src/renderer/**/*.{js,ts,jsx,tsx,css}'],
   theme: {
     fontFamily: {
@@ -120,5 +122,5 @@ module.exports = {
       colors,
     },
   },
-  plugins: [require('@tailwindcss/typography')],
-};
+  plugins: [typography],
+} satisfies Config;

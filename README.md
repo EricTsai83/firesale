@@ -50,9 +50,11 @@ src/preload.ts        Bridge between the main process and the UI
 src/renderer/        Editor events, Markdown rendering, and styles
 src/electron.d.ts    Shared API and Electron/Vite type declarations
 index.html           Application layout
-forge.config.js      Build and packaging configuration
-vite.*.config.mjs    Vite configuration for each process
+forge.config.ts      Build and packaging configuration
+vite.*.config.ts     Vite configuration for each process
 ```
+
+Configuration files use TypeScript and ES modules (`"type": "module"`). Electron's main and preload processes are bundled as CommonJS `.cjs` files in `.vite/build/`.
 
 The UI uses Tailwind CSS. Markdown is converted to HTML with unified, remark, and rehype.
 

@@ -1,4 +1,6 @@
-module.exports = {
+import type { ForgeConfig } from '@electron-forge/shared-types';
+
+export default {
   packagerConfig: {},
   rebuildConfig: {},
   makers: [
@@ -9,6 +11,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+      config: {},
     },
     {
       name: '@electron-forge/maker-deb',
@@ -26,22 +29,22 @@ module.exports = {
         build: [
           {
             entry: 'src/main/index.ts',
-            config: 'vite.main.config.mjs',
+            config: 'vite.main.config.ts',
             target: 'main',
           },
           {
             entry: 'src/preload.ts',
-            config: 'vite.preload.config.mjs',
+            config: 'vite.preload.config.ts',
             target: 'preload',
           },
         ],
         renderer: [
           {
             name: 'main_window',
-            config: 'vite.renderer.config.mjs',
+            config: 'vite.renderer.config.ts',
           },
         ],
       },
     },
   ],
-};
+} satisfies ForgeConfig;
