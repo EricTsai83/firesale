@@ -5,7 +5,7 @@
 This is a companion repo for the [Electron-v3][course] course on [Frontend Masters][fem].
 
 ## Setup
-Make sure you have [Node.js](https://nodejs.org/) v18.12 or newer, [Git](https://git-scm.com/), and [pnpm](https://pnpm.io/) installed.
+Make sure you have [Node.js](https://nodejs.org/) v22.12 or newer, [Git](https://git-scm.com/), and [pnpm](https://pnpm.io/) installed. The pnpm version is pinned in `package.json`.
 
 Run `corepack enable` to enable pnpm through Corepack.
 
